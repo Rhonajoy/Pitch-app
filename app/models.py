@@ -3,6 +3,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 from . import login_manager
+# modifies the load_userfunction by passing in a user_id to the function that queries the database and gets a User with that ID.
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 # user table
 class User(UserMixin, db.Model):  
     __tablename__ = 'users'
@@ -12,8 +16,10 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(255))
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
+
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     
+ 
     # save user
 
     def save_user(self):

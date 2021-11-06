@@ -16,7 +16,7 @@ def index():
         
 
 @main.route('/category', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def add_category():
     form = CategoryForm()
     if form.validate_on_submit():
