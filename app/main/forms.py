@@ -10,3 +10,6 @@ from wtforms import ValidationError
 class CategoryForm(FlaskForm):
     name = StringField('Category Name', validators=[Required(), Length(1, 64)])
     submit = SubmitField('Submit')
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('Tell us about you.',validators = [Required()])
+    submit = SubmitField('Submit')
