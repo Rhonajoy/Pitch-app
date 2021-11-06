@@ -11,7 +11,7 @@ def index():
     # pitches = Post.query.order_by(Post.timestamp.desc()).all()
 
     return render_template('index.html')
-@main.route('/user/<uname>')
+@main.route('/user/<username>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
 
