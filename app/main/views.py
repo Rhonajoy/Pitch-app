@@ -22,11 +22,10 @@ def profile(uname):
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
 def update_profile(uname):
+    form = UpdateProfile()
     user = User.query.filter_by(username = uname).first()
     if user is None:
         abort(404)
-
-    form = UpdateProfile()
 
     if form.validate_on_submit():
         user.bio = form.bio.data
@@ -64,23 +63,23 @@ def add_category():
 #         return redirect(url_for('.index'))
 #     return render_template('pitch.html', form=form)
 
-@main.route('/pitches/new/', methods = ['GET', 'POST'])
-@login_required
-def new_pitch():
-  form = FormPitch()
+# @main.route('/pitches/new/', methods = ['GET', 'POST'])
+# @login_required
+# def new_pitch():
+#   form = FormPitch()
   
-  if form.validate_on_submit():
-    description = form.description.data
-    title = form.title.data
-    user_id = current_user
-    category = form.category.data
-    new_pitch = Pitches(owner_id=current_user._get_current_object().id, title=title, description=description, category=category)
-    db.session.add(new_pitch)
-    db.session.commit()
+#   if form.validate_on_submit():
+#     name = form.name.data
+#     content= form.content.data
+#     user_id = current_user.id
+#     category = form.category.data
+#     new_pitch = Pitches(user_id=user_id, name=name, content=content, category=category)
+#     db.session.add(new_pitch)
+#     db.session.commit()
 
-    return redirect(url_for('main.index'))
+#     return redirect(url_for('main.index'))
 
-  return render_template('pitches.html', form=form)
+#   return render_template('pitches.html', form=form)
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
 def update_pic(uname):

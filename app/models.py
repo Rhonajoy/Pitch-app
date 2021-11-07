@@ -86,7 +86,7 @@ class Category(db.Model):
         return f'Category {self.name}'
 class Pitches(db.Model):  
     __tablename__ = 'pitches'
-    id = db.Column(db.Integer, primary_key=True)
+    pitch_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     content = db.Column(db.String(255))
     category = db.Column(db.String(255), nullable=False)
@@ -106,3 +106,22 @@ class Pitches(db.Model):
 
     def __repr__(self):
         return f'Pitch {self.content}'
+
+class Comment(db.Model):
+    __tablename__='comments'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    content = db.Column(db.String(255))
+    date_created=db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def __repr__(self):
+        return f'Comment {self.name}'
+
+
