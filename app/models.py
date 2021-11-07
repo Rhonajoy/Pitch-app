@@ -68,17 +68,34 @@ class Post(db.Model):
     def __repr__(self):
         return f'Post {self.title}'
 
-# category table
-class Category(db.Model):  
-    __tablename__ = 'categories'
+# # category table
+# class Category(db.Model):  
+#     __tablename__ = 'categories'
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(255))
+#     description = db.Column(db.String(255))
+#     post = db.relationship('Post', backref='category', lazy='dynamic')
+
+#     # save category
+
+#     def save_category(self):
+#         db.session.add(self)
+#         db.session.commit()
+
+#     def __repr__(self):
+#         return f'Category {self.name}'
+class Pitches(db.Model):  
+    __tablename__ = 'pitches'
     id = db.Column(db.Integer, primary_key=True)
+    category=db.Column(db.Sting)
     name = db.Column(db.String(255))
-    description = db.Column(db.String(255))
+    content = db.Column(db.String(255))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     post = db.relationship('Post', backref='category', lazy='dynamic')
 
     # save category
 
-    def save_category(self):
+    def save_pitch(self):
         db.session.add(self)
         db.session.commit()
 

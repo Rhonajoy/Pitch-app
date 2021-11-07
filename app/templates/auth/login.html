@@ -14,6 +14,20 @@
         </div>
       {% endfor %}
       <!-- Login form -->
+      <!-- <form >
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" required class="form-control" id="email"  name="email"  ><br>
+          <label for="password">Password</label>
+          <input type="password" required class="form-control" id="password" name="password" aria-required=""><br>
+          <input type="checkbox" required class="form-control" id="checkbox" name="checkbox" aria-required=""><br>
+          <label for="checkbox">REMEMBER ME</label>
+            
+        </div><br>
+        <button type="submit" id="submit" class="btn btn-warning">Log In</button>
+    </form> -->
+
+
       {{wtf.quick_form(login_form)}}
       <p> Don't have an account? <a href="{{url_for('auth.register')}}">Sign up here</a></p>
      </div>
