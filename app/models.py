@@ -68,37 +68,41 @@ class Post(db.Model):
     def __repr__(self):
         return f'Post {self.title}'
 
-# # category table
-# class Category(db.Model):  
-#     __tablename__ = 'categories'
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(255))
-#     description = db.Column(db.String(255))
-#     post = db.relationship('Post', backref='category', lazy='dynamic')
-
-#     # save category
-
-#     def save_category(self):
-#         db.session.add(self)
-#         db.session.commit()
-
-#     def __repr__(self):
-#         return f'Category {self.name}'
-class Pitches(db.Model):  
-    __tablename__ = 'pitches'
+# category table
+class Category(db.Model):  
+    __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
-    category=db.Column(db.Sting)
     name = db.Column(db.String(255))
-    content = db.Column(db.String(255))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    description = db.Column(db.String(255))
     post = db.relationship('Post', backref='category', lazy='dynamic')
 
     # save category
 
-    def save_pitch(self):
+    def save_category(self):
         db.session.add(self)
         db.session.commit()
 
     def __repr__(self):
         return f'Category {self.name}'
+class Pitches(db.Model):  
+    __tablename__ = 'pitches'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    content = db.Column(db.String(255))
+    category = db.Column(db.String(255), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post = db.relationship('Post', backref='category', lazy='dynamic')
+    comments = db.relationship('Comment', backref='pitch', lazy = 'dynamic')
+    upvotes = db.relationship('Upvote', backref = 'pitch', lazy = 'dynamic')
+    downvotes = db.relationship('Downvote', backref = 'pitch', lazy = 'dynamic')
 
+
+    # save category
+
+    @classmethod
+    def get_pitches(cls, id):
+        pitches = Pitches.query.order_by(pitch_id=id).desc().all()
+        return pitches
+
+    def __repr__(self):
+        return f'Pitch {self.content}'
