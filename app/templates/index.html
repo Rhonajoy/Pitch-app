@@ -1,13 +1,49 @@
 {% extends 'base.html'%}
-
-
-
-
+{% import 'macros.html' as macro%}
+{% block head %}
+<!-- css link -->
+{% block styles %}
+<!--bootstrap link-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='static/css/index.css') }}">
+{% endblock %}
+<title>{{ title }}</title>
+{% endblock %}
 {% block content %}
 
-<div class="container">
-   
-    
-        <!-- {% include 'pitch.html' %} -->
-    
-{% endblock %} 
+<div class="container"  >
+        <div class="row">
+          {% for pitch in pitches %}
+          <div class="col-md-4 ">
+            <div class="panel panel-default text-center bg-info" id="display1">
+                <div class="panel-heading">
+                    <h4 span style="font-weight: 900;">{{ pitch.title}}</h4>
+                </div>
+                <div class="panel-body">
+                    <p>{{ pitch.content }}</p>
+                    <p class="panel-text"><strong>Created on: <span class="badge rounded-pill bg-warning text-dark">{{
+                      pitch.date_created  }}</span></strong> </p>
+                    
+                </div>
+            </div>
+        </div> 
+          {% endfor %}
+                        
+        </div>   
+              </div>
+            
+{% endblock %}
+<!-- <div class="col-md-4">
+            
+  <div class="card card-login-mt3"  >
+        
+    <div class="card-body text-center" >
+      
+      <h5 class="card-title heading"> {{ pitch.title}} </h5>
+      <p class="card-text mt-1">{{ pitch.content }}</p>
+    </div>
+    <div class="card-body text-center">
+      <p class="card-text"><strong>Created on: <span class="badge rounded-pill bg-warning text-dark">{{
+              pitch.date_created  }}</span></strong> </p>
+            </div> -->

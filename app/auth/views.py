@@ -15,8 +15,9 @@ def register():
         db.session.commit()
         
         title = "New Account"
-        mail_message("Welcome to Pitch_App","email/welcome_user",user.email,user=user)
+        # mail_message("Welcome to Pitch_App","email/welcome_user",user.email,user=user)
         return redirect(url_for('auth.login'))
+    flash ("You Have registered an account Successefully !Please log in")
     return render_template('auth/register.html',registration_form = form)
 # login
 @auth.route('/login',methods=['GET','POST'])

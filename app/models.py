@@ -17,7 +17,7 @@ class User(UserMixin, db.Model):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
 
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
+    # posts = db.relationship('Post', backref='author', lazy='dynamic')
     
  
     # save user
@@ -49,24 +49,24 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return f'User {self.username}'
-# post table
-class Post(db.Model):  
-    __tablename__ = 'posts'
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(255))
-    content = db.Column(db.Text)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
-    date_posted = db.Column(db.DateTime, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+# # post table
+# class Post(db.Model):  
+#     __tablename__ = 'posts'
+#     id = db.Column(db.Integer, primary_key=True)
+#     title = db.Column(db.String(255))
+#     content = db.Column(db.Text)
+#     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+#     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    # save post
+#     # save post
 
-    def save_post(self):
-        db.session.add(self)
-        db.session.commit()
+#     def save_post(self):
+#         db.session.add(self)
+#         db.session.commit()
 
-    def __repr__(self):
-        return f'Post {self.title}'
+#     def __repr__(self):
+#         return f'Post {self.title}'
 
 # category table
 class Category(db.Model):  
@@ -74,7 +74,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     description = db.Column(db.String(255))
-    post = db.relationship('Post', backref='category', lazy='dynamic')
+    # post = db.relationship('Post', backref='category', lazy='dynamic')
 
     # save category
 
@@ -87,11 +87,12 @@ class Category(db.Model):
 class Pitches(db.Model):  
     __tablename__ = 'pitches'
     pitch_id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
+    title = db.Column(db.String(255))
     content = db.Column(db.String(255))
+    author = db.Column(db.String(255))
+    date_created=db.Column(db.DateTime, default=datetime.utcnow)
     category = db.Column(db.String(255), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    # post = db.relationship('Post', backref='category', lazy='dynamic')
     # comments = db.relationship('Comment', backref='pitch', lazy = 'dynamic')
     # upvotes = db.relationship('Upvote', backref = 'pitch', lazy = 'dynamic')
     # downvotes = db.relationship('Downvote', backref = 'pitch', lazy = 'dynamic')
@@ -99,18 +100,14 @@ class Pitches(db.Model):
 
     # save category
 
-    @classmethod
-    def get_pitches(cls, id):
-        pitches = Pitches.query.order_by(pitch_id=id).desc().all()
-        return pitches
-
-    def __repr__(self):
-        return f'Pitch {self.content}'
-
+    def save_pitches(self):
+        db.session.add(self)
+        db.session.commit()
+    def repr(self):
+        return f'Post {self.title}'
 class Comment(db.Model):
     __tablename__='comments'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
     content = db.Column(db.String(255))
     date_created=db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -123,5 +120,11 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f'Comment {self.name}'
+class PhotoProfile(db.Model):
+    __tablename__ = 'profile_photos'
+
+    id = db.Column(db.Integer,primary_key = True)
+    pic_path = db.Column(db.String())
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
 
 
