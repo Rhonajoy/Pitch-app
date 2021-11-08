@@ -55,17 +55,7 @@ def new_pitch():
         
 
     return render_template('pitch.html', pitch_form = pitch_form)
-@main.route('/category', methods=['GET', 'POST'])
-@login_required
-def add_category():
-    form = CommentForm()
-    if form.validate_on_submit():
-        category = Category(name=form.name.data)
-        db.session.add(category)
-        db.session.commit()
-        flash('Category added successfully.')
-        return redirect(url_for('.index'))
-    return render_template('category.html', form=form)
+
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
 def update_pic(uname):

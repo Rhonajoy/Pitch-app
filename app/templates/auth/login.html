@@ -11,6 +11,16 @@
 
 {% block content %}
 <div class="container"> 
+  <div class="row">
+      <div class="col-md-12 ">
+      <div class="jumbotron  bg-warning mt-3">
+          <div class="container">
+            <p id="lead"><h4>Login Form</h4> </p>
+         
+          </div>
+      </div>
+    </div>
+  </div>
   
     <div class="row">
       <div class= "col-md-2"> </div>
@@ -21,7 +31,7 @@
           <div class="row">
           <div class="col-md-3"></div>
           <div class="col-md-6 ">
-              <p id="lead"><h4>Login Form</h4> </p>
+             
               {{wtf.quick_form(login_form)}}
       <p> Don't have an account? <a href="{{url_for('auth.register')}}">Sign up here</a></p>
           </div>
