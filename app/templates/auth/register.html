@@ -1,17 +1,54 @@
 {% extends 'base.html'%}
 {% import 'bootstrap/wtf.html' as wtf%}
+{% block head %}
+{% block styles %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/register.css')}}">       
+{% endblock%}
+{% endblock%}
  
 {% block content %}
 <div class="container">
+   <div class="row">
+        <div class="jumbotron  bg-warning">
+            <div class="container">
+            <h1 class="display-4">Pitch App</h1>
+           
+            </div>
+        </div>
+    </div>
 <div class="row">
 <div class="col-md-2"> </div>
 <div class="col-md-8">
-
-{{wtf.quick_form(registration_form)}}
-
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+        </div>
+      {% endfor %}
+    <div class="card mt-5 bg-info " id="display1">
+        
+        <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 ">
+            <p id="lead"><h4>Register Form</h4> </p>
+            {{wtf.quick_form(registration_form)}}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
 </div>
 <div class="col-md-2"></div>
 </div>
 </div>
+<div class="container bg-warning mt-5" id ="footer">
+    <div class="container text-center" id="socials">
+        <p><b>rhonajoy8@gmail.com</b></p>
+        <p><b>&copy; 2021</b></p>
+        <p><b>Made with<span class="fa fa-heart" style="color: red;" aria-hidden="true"></span></b></p>
+      </div>
+  
+  </div>
 
 {% endblock%}
