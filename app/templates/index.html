@@ -29,8 +29,11 @@
                 <div class="panel-body">
                     <p>{{ pitch.content }}</p>
                     <p class="panel-text"><strong>Created on: <span class="badge rounded-pill bg-warning text-dark">{{
-                      pitch.date_created  }}</span></strong> </p>
-                    
+                      pitch.date_created  }}</span></strong> <br>
+                      <a href="{{url_for('main.like',pitch_id = pitch.pitch_id)}}"> <i class="fa fa-thumbs-up"></i> likes: {{pitch.likes.count()}}</a>
+                      <a href="{{ url_for('main.comments', pitch_id = pitch.pitch_id)}}"><i class="fa fa-comments" aria-hidden="true"></i>comment</a>
+                    </p>
+                      
                 </div>
             </div>
         </div> 

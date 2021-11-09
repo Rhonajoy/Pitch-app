@@ -24,7 +24,7 @@ class FormPitch(FlaskForm):
     content = TextAreaField('Pitch Content', validators=[Required()])
     submit = SubmitField('Submit')
 
-class CommentForm():
+class CommentForm(FlaskForm):
     content = TextAreaField('Pitch Content', validators=[Required()])
     submit = SubmitField('Submit')
 

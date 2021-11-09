@@ -1,7 +1,7 @@
 from flask import render_template,request, redirect, url_for, abort, flash
 from . import main
 from flask_login import login_required, current_user
-from ..models import User,  Category,Pitches,Comment
+from ..models import Likes, User,Pitches,Comment
 from .. import db, photos
 from .forms import UpdateProfile,FormPitch,CommentForm
 
@@ -66,21 +66,52 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
-@main.route('/comment/new/<int:pitch_id>', methods = ['GET', 'POST'])
+@main.route('/comments/<pitch_id>', methods=['GET', 'POST'])
 @login_required
-def new_comment(pitch_id):
-  form = CommentForm()
-  pitch = Pitches.query.get(pitch_id)
-  if form.validate_on_submit():
-    content = form.content.data
-    new_comment = Comment(content=content, pitch_id = pitch_id)
-    db.session.add(new_comment)
+def comments(pitch_id):
+    
+    # get all comments of the pitch
+    comments = Comment.query.filter_by(pitch_id=pitch_id).all()
+    pitch = Pitches.query.get(pitch_id)
+    form = CommentForm()
+    if pitch is None:
+        abort(404)
+    
+    if form.validate_on_submit():
+            comment = Comment(
+            content=form.content.data,
+            pitch_id=pitch_id,
+            user_id=current_user.id
+
+        )
+            db.session.add(comment)
+            db.session.commit()
+            form.content.data = ''
+            flash('Your comment has been posted successfully!')
+    return render_template('comments.html',pitches= pitch, comment=comments, form = form)
+@main.route('/like/<pitch_id>', methods=['GET', 'POST'])
+@login_required
+def like(pitch_id):
+    pitch = Pitches.query.get(pitch_id)
+    if pitch is None:
+        abort(404)
+    # check if the user has already liked the pitch
+    like = Likes.query.filter_by(user_id=current_user.id, pitch_id=pitch_id).first()
+    if like is not None:
+        # if the user has already liked the pitch, delete the like
+        db.session.delete(like)
+        db.session.commit()
+        flash('You have successfully unlike the pitch!')
+        return redirect(url_for('.index'))
+    # if the user has not liked the pitch, add a like
+    new_like = Likes(
+        user_id=current_user.id,
+        pitch_id=pitch_id
+    )
+    db.session.add(new_like)
     db.session.commit()
-    return redirect(url_for('.new_comment', pitch_id = pitch_id))
-
-  
-  return render_template('comments.html', form = form, pitch = pitch)
-
+    
+    return redirect(url_for('.index'))
 
 
 
