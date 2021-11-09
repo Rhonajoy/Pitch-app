@@ -1,7 +1,7 @@
 from flask import render_template,request, redirect, url_for, abort, flash
 from . import main
 from flask_login import login_required, current_user
-from ..models import Likes, User,Pitches,Comment
+from ..models import Likes, User,Pitches,Comment,Dislikes
 from .. import db, photos
 from .forms import UpdateProfile,FormPitch,CommentForm
 
@@ -109,6 +109,29 @@ def like(pitch_id):
         pitch_id=pitch_id
     )
     db.session.add(new_like)
+    db.session.commit()
+    
+    return redirect(url_for('.index'))
+@main.route('/dislike/<pitch_id>', methods=['GET', 'POST'])
+@login_required
+def dislike(pitch_id):
+    pitch = Pitches.query.get(pitch_id)
+    if pitch is None:
+        abort(404)
+    # check if the user has already liked the pitch
+    dislike =  Dislikes.query.filter_by(user_id=current_user.id, pitch_id=pitch_id).first()
+    if dislike is not None:
+        # if the user has already liked the pitch, delete the like
+        db.session.delete(dislike)
+        db.session.commit()
+        
+        return redirect(url_for('.index'))
+    # if the user has not liked the pitch, add a like
+    new_dislike = Dislikes(
+        user_id=current_user.id,
+        pitch_id=pitch_id
+    )
+    db.session.add(new_dislike)
     db.session.commit()
     
     return redirect(url_for('.index'))

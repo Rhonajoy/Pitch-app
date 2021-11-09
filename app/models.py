@@ -60,7 +60,7 @@ class Pitches(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     # comments = db.relationship('Comment', backref='pitch', lazy = 'dynamic')
     likes = db.relationship('Likes', backref = 'pitch', lazy = 'dynamic')
-    # downvotes = db.relationship('Downvote', backref = 'pitch', lazy = 'dynamic')
+    dislikes = db.relationship('Dislikes', backref = 'pitch', lazy = 'dynamic')
 
 
     # save category
