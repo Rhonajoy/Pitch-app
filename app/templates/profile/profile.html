@@ -34,7 +34,7 @@
      {%else %}
          {% if user == current_user%}
          <div class="card">
-             <p class="text-muted">Please add bio so others can see about you</p>
+             <p class="text-muted">Say Something about yourself ...</p>
              <button class="btn btn-small"><a href="{{url_for('main.update_profile',uname=user.username)}}">Add bio</a></button>
          </div>
          {%else%}
