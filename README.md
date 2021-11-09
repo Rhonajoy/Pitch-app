@@ -1,11 +1,10 @@
-# Pitch
+# Pitch-App
 
-#### Created By Wilson Kinyua Muthoni on 18-09-2021
+#### Created By Rhonajoy
 
 ## Description
 
-A web application where users will submit their one minute pitches and other users will vote on them and leave comments to give their feedback on them.
-
+A web application that allows users to read pitches and post oonce you are logged in. It also allows a user to like ,dislike and comment on a pitch they love.
 ## Setup Requirements
 
 - Git
@@ -63,42 +62,19 @@ The following languages have been used on this project:
 
 ## Setup/Installation Requirements
 
-- Live link to view the project <a target="_blank" href="https://pitch-easy.herokuapp.com/">View Pitch</a>
+- Live link to view the project <a target="_blank" href="">View Pitch</a>
 
-## Some Screenshots
-
-- Homepage
-  <img src="./screenshots/1.png" alt="screenshot" />
-
-- Single Pitch Category
-  <img src="./screenshots/2.png" alt="screenshot" />
-
-- Single Pitch with Comments
-  <img src="./screenshots/3.png" alt="screenshot" />
-
-- Profile Page
-  <img src="./screenshots/4.png" alt="screenshot" />
-
-- My Pitches on Profile Page
-  <img src="./screenshots/5.png" alt="screenshot" />
-
-- Add Pitch
-  <img src="./screenshots/6.png" alt="screenshot" />
-
-- Fully phone responsive
-  <br>
-  <img src="./screenshots/7.png" alt="screenshot" />
 
 ## Known Bugs
 
-So far so good there are no bugs related to this project 😎
+ no bugs found in the project
 
-## Support and contact details 🙂
+## Support and contact details 
 
 To make a contribution to the code used or any suggestions you can click on the contact link and email me your suggestions.
 
-- Email: wilson@developerwilson.com
-- Phone: +254717255460
+- Email:rhonajoy8@gmail.com
+- Phone: +254 706555078
 
 ## License
 
