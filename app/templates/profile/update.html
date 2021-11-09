@@ -1,8 +1,36 @@
-{% extends 'base.html' %}
-{% import 'bootstrap/wtf.html' as wtf %}
-
+{% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf%}
+{% block head %}
+{% block styles %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">       
+{% endblock%}
+{% endblock%}
 {% block content %}
 <div class="container">
-  {{wtf.quick_form(form)}}
+  <div class="jumbotron  bg-warning mt-3">
+    <div class="container">
+    <h1 class="display-4">Bio Form</h1>
+   
+    </div>
+</div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="card" id ="update">
+        {{wtf.quick_form(form)}}
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="container bg-warning mt-5" id ="footer">
+    <div class="container text-center" id="socials">
+        <p><b>rhonajoy8@gmail.com</b></p>
+          <p><b>&copy; 2021</b></p>
+            <p><b>Made with<span class="fa fa-heart" style="color: red;" aria-hidden="true"></span></b></p>
+  </div>
+            
+</div>
 </div>
 {% endblock %}

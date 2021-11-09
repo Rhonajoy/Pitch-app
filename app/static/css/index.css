@@ -1,0 +1,38 @@
+#head{
+    background-color: navy;
+}
+.navbar-brand{
+    color:tomato;
+}
+.navbar li a {
+text-decoration: none;
+color:tomato;
+font-size: 15px;
+}
+#display1{
+    border-radius: 20px;
+   background-color:lightblue;
+}
+.btn-default,
+.btn-default:hover {
+  background-color: #000000;
+  border-color: #000000;
+  color: white;
+  margin-top: 10px;
+}
+#comments{
+    border-radius: 20px;
+    background-color:lightblue;
+}
+#comments1{
+    border-radius: 10px;
+    background-color:lightblue; 
+}
+#update{
+    border-radius: 10px;
+    background-color:lightblue;  
+}
+.panel-text a{
+    text-decoration: none;
+    color:black;
+}

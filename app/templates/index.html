@@ -1,5 +1,5 @@
 {% extends 'base.html'%}
-{% import 'macros.html' as macro%}
+
 {% block head %}
 <!-- css link -->
 {% block styles %}
@@ -22,7 +22,7 @@
         <div class="row">
           {% for pitch in pitches %}
           <div class="col-md-4 ">
-            <div class="panel panel-default text-center bg-info" id="display1">
+            <div class="panel panel-default text-center " id="display1">
                 <div class="panel-heading">
                     <h4 span style="font-weight: 900;">{{ pitch.title}}</h4>
                 </div>

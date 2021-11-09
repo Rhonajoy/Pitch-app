@@ -1,19 +1,63 @@
 {% extends 'base.html'%}
 {% import 'bootstrap/wtf.html' as wtf%}
+{% block head %}
+{% block styles %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">       
+{% endblock%}
+{% endblock%}
 
 {% block content %}
  <body>
-    {% for message in get_flashed_messages() %}
+  <div class="jumbotron  bg-warning mt-3">
+    <div class="container">
+    <h1 class="display-4">Comments Form</h1>
+   
+    </div>
+</div>
+    <!-- {% for message in get_flashed_messages() %}
     <div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     {{ message }}
     </div>
-    {% endfor %}
+    {% endfor %} -->
   <div  class="container">
-    {{wtf.quick_form(form)}}
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="card w-50 m-1 p-2"  id= "comments">
+          {{wtf.quick_form(form)}}
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+     
+
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+      <div class="card w-20 m-1 p-2"  id ="comments1"> 
+      {% for comment in comment %}
+       
+          <p>Comment:<strong>{{ comment.content }}</strong></p>
+          <p>Date Posted :<strong>{{ comment.date_created }}</strong></p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+   
+   
+    
+    
   </div>
-  {% for comment in comment %}
-  <p>{{ comment.content }}</p>
-  {% endfor %}
+  
  </body>
+ <div class="container bg-warning mt-3" id ="footer">
+  <div class="container text-center" id="socials">
+      <p><b>rhonajoy8@gmail.com</b></p>
+      <p><b>&copy; 2021</b></p>
+      <p><b>Made with<span class="fa fa-heart" style="color: red;" aria-hidden="true"></span></b></p>
+    </div>
+
+</div>
 {%endblock%}

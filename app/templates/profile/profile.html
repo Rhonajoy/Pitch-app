@@ -1,10 +1,24 @@
 {% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf%}
+{% block head %}
+{% block styles %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">       
+{% endblock%}
+{% endblock%}
 
 {% block content %}
+<div class="jumbotron  bg-warning mt-3">
+    <div class="container">
+    <h1 class="display-4">Profile</h1>
+   
+    </div>
+</div>
 <div class="profile d-flex flex-row w-75 m-auto shadow p-3 mt-5 bg-body rounded">
   <div class="profile-info w-50 d-flex flex-column align-items-center ">
-     <h2>{{ user.name }}</h2>
-     {% if user.profile_pic%}
+     <h2> {{user.username| capitalize}} </h2>
+     {% if user.profile_pic_path%}
           <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="profile pic" class="img-thumbnail">
      {%else%}
      <img src="{{url_for('static',filename='photos/download.png')}}" alt="" class="img-thumbnail">
@@ -28,5 +42,13 @@
          {%endif%}
      {%endif%}
   </div>
-
+</div>
+<div class="container bg-warning mt-5" id ="footer">
+    <div class="container text-center" id="socials">
+        <p><b>rhonajoy8@gmail.com</b></p>
+          <p><b>&copy; 2021</b></p>
+            <p><b>Made with<span class="fa fa-heart" style="color: red;" aria-hidden="true"></span></b></p>
+  </div>
+            
+</div>
 {% endblock %}
