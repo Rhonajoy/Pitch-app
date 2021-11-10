@@ -62,7 +62,7 @@ The following languages have been used on this project:
 
 ## Setup/Installation Requirements
 
-- Live link to view the project <a target="_blank" href="">View Pitch</a>
+- Live link to view the project <a target="_blank" href="https://joypitches.herokuapp.com/">View Pitch</a>
 
 
 ## Known Bugs
